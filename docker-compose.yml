@@ -1,6 +1,7 @@
 services:
   wordpress:
-    image: wordpress:latest
+    build:
+      context: .
     container_name: prueba
     restart: always
     environment:
