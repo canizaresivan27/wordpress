@@ -20,7 +20,8 @@ services:
 #             docker-entrypoint.sh apache2-foreground"
 #    ports:
 #      - "9095:80"
-
+    networks:
+      wordpress-prueba:
   db:
     image: mysql:8.0
     container_name: db
@@ -32,7 +33,16 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     volumes:
       - db-prueba:/var/lib/mysql
-
+    networks:
+      wordpress-prueba:
+      
 volumes:
   wordpress-prueba:
   db-prueba:
+
+networks:
+  wordpress-prueba:
+    name: wordpress-prueba
+    driver: bridge
+  
+
