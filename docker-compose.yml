@@ -1,0 +1,40 @@
+services:
+  wordpress:
+    image: wordpress:latest
+    container_name: prueba
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: prueba_db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+      PHP_MEMORY_LIMIT: 1512M
+      upload_max_filesize: 500M
+    volumes:
+      - wordpress-prueba:/var/www/html
+      - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
+    networks:
+      - hosting
+    command: >
+      sh -c "echo 'ServerName localhost' >> /etc/apache2/conf-available/servername.conf &&
+             a2enconf servername &&
+             docker-entrypoint.sh apache2-foreground"
+#    ports:
+#      - "9095:80"
+
+  db:
+    image: mysql:8.0
+    container_name: prueba_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - ./db:/var/lib/mysql
+    networks:
+      - hosting
+
+volumes:
+  wordpress-prueba:
