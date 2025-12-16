@@ -13,8 +13,6 @@ services:
     volumes:
       - wordpress-prueba:/var/www/html
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
-    networks:
-      - hosting
     command: >
       sh -c "echo 'ServerName localhost' >> /etc/apache2/conf-available/servername.conf &&
              a2enconf servername &&
@@ -33,8 +31,6 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     volumes:
       - ./db:/var/lib/mysql
-    networks:
-      - hosting
 
 volumes:
   wordpress-prueba:
