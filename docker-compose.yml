@@ -14,10 +14,10 @@ services:
     volumes:
       - wordpress-prueba:/var/www/html
       - ./custom-php.ini:/usr/local/etc/php/conf.d/custom-php.ini
-    command: >
-      sh -c "echo 'ServerName localhost' >> /etc/apache2/conf-available/servername.conf &&
-             a2enconf servername &&
-             docker-entrypoint.sh apache2-foreground"
+#    command: >
+#      sh -c "echo 'ServerName localhost' >> /etc/apache2/conf-available/servername.conf &&
+#             a2enconf servername &&
+#             docker-entrypoint.sh apache2-foreground"
 #    ports:
 #      - "9095:80"
 
